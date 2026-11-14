@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Difference Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>📅 Date Calculator</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" value="{{ start_date }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" value="{{ end_date }}" required>
+            </div>
+
+            <button type="submit">Calculate Difference</button>
+        </form>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if result %}
+        <div class="result-box">
+            <h3>Difference Breakdown</h3>
+            <div class="stat-grid">
+                <div class="stat-item" style="grid-column: span 2;">
+                    <div class="stat-value">{{ result.total_days }} Days</div>
+                    <div class="stat-label">Total Duration</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ result.weeks }}w {{ result.remaining_days }}d</div>
+                    <div class="stat-label">Weeks & Days</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">{{ result.months }}</div>
+                    <div class="stat-label">Approx. Months</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
